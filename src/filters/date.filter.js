@@ -1,4 +1,6 @@
 /* eslint-disable no-undef */
+import store from '../store';
+
 // eslint-disable-next-line no-unused-vars
 export default function dateFilter(value, format = 'date') {
   const options = {}
@@ -12,6 +14,8 @@ export default function dateFilter(value, format = 'date') {
       options.minute = '2-digit',
       options.second = '2-digit'
   }
+
+  const locale = store.getters.info.locale || 'ru-RU'
   // eslint-disable-next-line no-undef
-  return new Intl.DateTimeFormat('ru-RU', options).format(new Date(value))
+  return new Intl.DateTimeFormat(locale, options).format(new Date(value))
 }

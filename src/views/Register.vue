@@ -90,16 +90,21 @@
 </template>
 
 <script>
-import { email, required, minLength } from "vuelidate/lib/validators";
+import { email, required, minLength } from 'vuelidate/lib/validators'
 
 export default {
+  metaInfo() {
+    return {
+      title: this.$title('Register')
+    }
+  },
   data() {
     return {
-      email: "",
-      password: "",
-      name: "",
+      email: '',
+      password: '',
+      name: '',
       agree: false
-    };
+    }
   },
   validations: {
     email: { email, required },
@@ -110,8 +115,8 @@ export default {
   methods: {
     async submitHandler() {
       if (this.$v.$invalid) {
-        this.$v.$touch();
-        return;
+        this.$v.$touch()
+        return
       }
 
       const formData = {
@@ -119,13 +124,13 @@ export default {
         password: this.password,
         name: this.name
       }
-      
+
       try {
-        await this.$store.dispatch("register", formData);
-        this.$router.push("/");
-      // eslint-disable-next-line no-empty
-      } catch(e){}
+        await this.$store.dispatch('register', formData)
+        this.$router.push('/')
+        // eslint-disable-next-line no-empty
+      } catch (e) {}
     }
   }
-};
+}
 </script>

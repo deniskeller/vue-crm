@@ -16,9 +16,14 @@
 </template>
 
 <script>
-import HomeBill from "@/components/home/HomeBill";
-import HomeCurrency from "@/components/home/HomeCurrency";
+import HomeBill from '@/components/home/HomeBill'
+import HomeCurrency from '@/components/home/HomeCurrency'
 export default {
+  metaInfo() {
+    return {
+      title: this.$title('Menu_Bill')
+    }
+  },
   components: {
     HomeBill,
     HomeCurrency
@@ -27,19 +32,19 @@ export default {
     return {
       loading: true,
       currency: null
-    };
+    }
   },
   async mounted() {
-    this.currency = await this.$store.dispatch("fetchCurrency");
-    this.loading = false;
+    this.currency = await this.$store.dispatch('fetchCurrency')
+    this.loading = false
     // console.log(this.currency);
   },
   methods: {
     async refresh() {
-      this.loading = true;
-      this.currency = await this.$store.dispatch("fetchCurrency");
-      this.loading = false;
+      this.loading = true
+      this.currency = await this.$store.dispatch('fetchCurrency')
+      this.loading = false
     }
   }
-};
+}
 </script>

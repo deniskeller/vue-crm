@@ -67,15 +67,20 @@
   </form>
 </template>
 <script>
-import { email, required, minLength } from "vuelidate/lib/validators";
-import messages from "@/utils/messages";
+import { email, required, minLength } from 'vuelidate/lib/validators'
+import messages from '@/utils/messages'
 
 export default {
+  metaInfo() {
+    return {
+      title: this.$title('Login')
+    }
+  },
   data() {
     return {
-      email: "",
-      password: ""
-    };
+      email: '',
+      password: ''
+    }
   },
   validations: {
     email: { email, required },
@@ -83,27 +88,27 @@ export default {
   },
   mounted() {
     if (messages[this.$route.query.message]) {
-      this.$message(messages[this.$route.query.message]);
+      this.$message(messages[this.$route.query.message])
     }
   },
   methods: {
     async submitHandler() {
       if (this.$v.$invalid) {
-        this.$v.$touch();
-        return;
+        this.$v.$touch()
+        return
       }
 
       const formData = {
         email: this.email,
         password: this.password
-      };
+      }
 
       try {
-        await this.$store.dispatch("login", formData);
-        this.$router.push("/");
+        await this.$store.dispatch('login', formData)
+        this.$router.push('/')
         // eslint-disable-next-line no-empty
       } catch (e) {}
     }
   }
-};
+}
 </script>
